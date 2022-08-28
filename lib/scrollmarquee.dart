@@ -7,8 +7,8 @@ class ScrollMarquee extends StatefulWidget {
   final Speed speed;
 
   ScrollMarquee({
-    Key key,
-    @required this.items,
+    Key? key,
+    required this.items,
     this.speed = Speed.normal
   }): super(key: key);
 
@@ -18,7 +18,7 @@ class ScrollMarquee extends StatefulWidget {
 
 class _ScrollMarqueeState extends State<ScrollMarquee> {
 
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
   double _position = 0.0;
 
   @override
@@ -49,7 +49,7 @@ class _ScrollMarqueeState extends State<ScrollMarquee> {
 
   @override
   void dispose(){
-    _scrollController.dispose();
+    _scrollController!.dispose();
     super.dispose();
   }
 
@@ -57,8 +57,8 @@ class _ScrollMarqueeState extends State<ScrollMarquee> {
     double _moveDistance = 10.0;
 
     _position += _moveDistance;
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(_position, duration: widget.speed.moveDuration, curve: Curves.linear);
+    if (_scrollController!.hasClients) {
+      _scrollController!.animateTo(_position, duration: widget.speed.moveDuration, curve: Curves.linear);
     }
 
     await Future.delayed(widget.speed.moveDuration);

@@ -7,8 +7,8 @@ class AlternateMarquee extends StatefulWidget {
   final Speed speed;
 
   AlternateMarquee({
-    Key key,
-    @required this.items,
+    Key? key,
+    required this.items,
     this.speed = Speed.normal
   }): super(key: key);
 
@@ -18,7 +18,7 @@ class AlternateMarquee extends StatefulWidget {
 
 class _AlternateMarqueeState extends State<AlternateMarquee> {
 
-  ScrollController _scrollController;
+  ScrollController? _scrollController;
 
   @override
   void initState() {
@@ -43,18 +43,18 @@ class _AlternateMarqueeState extends State<AlternateMarquee> {
 
   @override
   void dispose(){
-    _scrollController.dispose();
+    _scrollController!.dispose();
     super.dispose();
   }
 
   Future<bool> _scroll() async {
     await Future.delayed(widget.speed.pauseDuration);
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo( _scrollController.position.maxScrollExtent, duration: widget.speed.animationDuration, curve: Curves.easeOut);
+    if (_scrollController!.hasClients) {
+      _scrollController!.animateTo( _scrollController!.position.maxScrollExtent, duration: widget.speed.animationDuration, curve: Curves.easeOut);
     }
     await Future.delayed(widget.speed.pauseDuration);
-    if (_scrollController.hasClients) {
-      _scrollController.animateTo(_scrollController.position.minScrollExtent, duration: widget.speed.backDuration, curve: Curves.easeOut);
+    if (_scrollController!.hasClients) {
+      _scrollController!.animateTo(_scrollController!.position.minScrollExtent, duration: widget.speed.backDuration, curve: Curves.easeOut);
     }
     return true;
   }
