@@ -2,23 +2,18 @@ import 'package:flutter/cupertino.dart';
 import 'speed.dart';
 
 class AlternateMarquee extends StatefulWidget {
-
   final List<Widget> items;
   final Speed speed;
 
-  AlternateMarquee({
-    Key? key,
-    required this.items,
-    this.speed = Speed.normal
-  }): super(key: key);
+  AlternateMarquee({Key? key, required this.items, this.speed = Speed.normal})
+      : super(key: key);
 
   @override
   _AlternateMarqueeState createState() => _AlternateMarqueeState();
 }
 
 class _AlternateMarqueeState extends State<AlternateMarquee> {
-
-  ScrollController? _scrollController;
+  late ScrollController _scrollController;
 
   @override
   void initState() {
@@ -32,29 +27,30 @@ class _AlternateMarqueeState extends State<AlternateMarquee> {
   @override
   Widget build(BuildContext context) {
     return Center(
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(children: widget.items),
-        controller: _scrollController,
-        physics: NeverScrollableScrollPhysics(), // not allow the user to scroll.
-      )
-    );
+        child: SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(children: widget.items),
+      controller: _scrollController,
+      physics: NeverScrollableScrollPhysics(), // not allow the user to scroll.
+    ));
   }
 
   @override
-  void dispose(){
-    _scrollController!.dispose();
+  void dispose() {
+    _scrollController.dispose();
     super.dispose();
   }
 
   Future<bool> _scroll() async {
     await Future.delayed(widget.speed.pauseDuration);
-    if (_scrollController!.hasClients) {
-      _scrollController!.animateTo( _scrollController!.position.maxScrollExtent, duration: widget.speed.animationDuration, curve: Curves.easeOut);
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+          duration: widget.speed.animationDuration, curve: Curves.easeOut);
     }
     await Future.delayed(widget.speed.pauseDuration);
-    if (_scrollController!.hasClients) {
-      _scrollController!.animateTo(_scrollController!.position.minScrollExtent, duration: widget.speed.backDuration, curve: Curves.easeOut);
+    if (_scrollController.hasClients) {
+      _scrollController.animateTo(_scrollController.position.minScrollExtent,
+          duration: widget.speed.backDuration, curve: Curves.easeOut);
     }
     return true;
   }

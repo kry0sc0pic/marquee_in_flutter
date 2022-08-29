@@ -1,8 +1,4 @@
-enum Speed {
-  slow,
-  normal,
-  fast
-}
+enum Speed { slow, normal, fast }
 
 extension SpeedExtensionForScroll on Speed {
   Duration get moveDuration {
