@@ -1,4 +1,4 @@
-enum Speed { slow, normal, fast }
+enum Speed { slow, normal, fast, mySpeed1, mySpeed2, mySpeed3 }
 
 extension SpeedExtensionForScroll on Speed {
   Duration get moveDuration {
@@ -8,6 +8,12 @@ extension SpeedExtensionForScroll on Speed {
       case Speed.normal:
         return Duration(milliseconds: 50);
       case Speed.fast:
+        return Duration(milliseconds: 25);
+      case Speed.mySpeed1:
+        return Duration(milliseconds: 100);
+      case Speed.mySpeed2:
+        return Duration(milliseconds: 50);
+      case Speed.mySpeed3:
         return Duration(milliseconds: 25);
     }
   }
@@ -22,6 +28,12 @@ extension SpeedExtensionForAlternate on Speed {
         return Duration(milliseconds: 1000);
       case Speed.fast:
         return Duration(milliseconds: 500);
+      case Speed.mySpeed1:
+        return Duration(seconds: 140);
+      case Speed.mySpeed2:
+        return Duration(seconds: 120);
+      case Speed.mySpeed3:
+        return Duration(seconds: 100);
     }
   }
 
